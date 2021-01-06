@@ -125,6 +125,7 @@ void main() {
     //CreateList_Sq(&LA);
    displayTable(LB);
    MergeList_Sq(LA,LB,&LC);
+   printf("LA和LB合并后的LC（其中的异常值为空值）：\n"); 
    displayTable(LC);
 	//Print_Sq(LA);
 }

@@ -136,9 +136,11 @@ int LocateElem_Sq(SqList L, ElemType e,Status(* compare)(ElemType ,ElemType)) {
 	else return 0;
 }
 //顺序表的合并
+//去除重复的  结果非输入的数据便是错误值（空值）
 void MergeList_Sq(SqList LA,SqList LB,SqList *LC) {
 	//LA LB已知  合并后为LC、
 	ElemType* pa, * pb, * pc, *pa_last, *pb_last;
+	int out;
 	//int pa_last, pb_last;
 	pa = LA.elem;
 	pb = LB.elem;
@@ -148,12 +150,69 @@ void MergeList_Sq(SqList LA,SqList LB,SqList *LC) {
 	if (!(*LC).elem)exit(OVERFLOW);//存储分配失败
 	pa_last = LA.elem + LA.length - 1;//LA最后一个元素
 	pb_last = LB.elem + LB.length - 1;//LB最后一个元素
+	/*
+	if (LA.length >= LB.length) {
+		while (pa <= pa_last) {
+			*pc++ = *pa++;
+		}
+		pa = LA.elem;
+		while (pa <= pa_last && pb <= pb_last) {
+			if (*pa == *pb)continue;
+			else {
+				*pc++ = *pb++;
+			}
+		}
+	}
+	else {
+		while (pb <= pb_last) {
+			*pc++ = *pb++;
+		}
+		pb = LB.elem;
+		while (pa <= pa_last && pb <= pb_last) {
+			if (*pa == *pb)
+			{
+				*pa++;
+				continue;
+			}
+			else {
+				*pc++ = *pa++;
+			}
+		}
+	}
+	*/
+	if (LA.length >= LB.length) {
+		while (pa <= pa_last) {
+			*pc++ = *pa++;
+		}
+		pa = LA.elem;
+		for(;pb<= pb_last;pb++){
+			for (out = 0, pa = LA.elem;pa <= pa_last;pa++) {
+				if (*pb == *pa) { out = 1;break; };
+			}
+			if (out == 1)continue;
+			else {*pc++ = *pb++;}
+		}
+	}
+	else {
+     		while (pb <= pb_last) {
+			*pc++ = *pb++;
+		}
+		for (;pa <= pa_last;pa++) {
+			for (out = 0, pb = LB.elem;pb <= pb_last;pb++) {
+				if (*pa == *pb) { out = 1;break; }
+			}
+			if (out == 1)continue;
+			else *pc++ = *pa;
+		}
+	}
+	/*
 	while (pa <= pa_last && pb <= pb_last) {
 		if (*pa <= *pb) *pc++ = *pa++;
 		else *pc++ = *pb++;
 	}
-	while (pa <= pa_last)*pc++ = *pa++;
-	while (pb <= pb_last) *pc++ = *pb++;
+	*/
+	//while (pa <= pa_last)*pc++ = *pa++;
+	//while (pb <= pb_last) *pc++ = *pb++;
 }
 
 //遍历
