@@ -1,0 +1,2 @@
+E:\C语言\Data_stuck\link\Debug\link.exe
+E:\C语言\Data_stuck\link\Debug\link.pdb
