@@ -1,0 +1,2 @@
+E:\C语言\数据结构c语言版本\List\SXList_project(1).c\Debug\SXList_project(1).c.exe
+E:\C语言\数据结构c语言版本\List\SXList_project(1).c\Debug\SXList_project(1).c.pdb
